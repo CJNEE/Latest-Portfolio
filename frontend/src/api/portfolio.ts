@@ -7,45 +7,51 @@ export const fetchProfile = async (): Promise<Profile> => {
 };
 
 export const fetchAboutMe = async (): Promise<AboutMe[]> => {
-  const { data } = await apiClient.get<AboutMe[]>('/aboutme/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/aboutme/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchSkills = async (): Promise<Skill[]> => {
-  const { data } = await apiClient.get<Skill[]>('/skills/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/skills/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchProjects = async (): Promise<Project[]> => {
-  const { data } = await apiClient.get<Project[]>('/projects/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/projects/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchEducation = async (): Promise<Education[]> => {
-  const { data } = await apiClient.get<Education[]>('/education/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/education/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchCertifications = async (): Promise<Certification[]> => {
-  const { data } = await apiClient.get<Certification[]>('/certifications/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/certifications/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchAchievements = async (): Promise<Achievement[]> => {
-  const { data } = await apiClient.get<Achievement[]>('/achievements/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/achievements/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchContact = async (): Promise<Contact[]> => {
-  const { data } = await apiClient.get<Contact[]>('/contact/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/contact/');
+  return Array.isArray(data) ? data : [];
 };
 
 export const fetchResume = async (): Promise<Resume[]> => {
-  const { data } = await apiClient.get<Resume[]>('/resume/');
-  return data;
+  const { data } = await apiClient.get<unknown>('/resume/');
+  return Array.isArray(data) ? data : [];
 };
 
+// Analytics tracking — fire-and-forget, never crash the app
 export const trackVisit = async (): Promise<void> => {
-  await apiClient.post('/analytics/track/');
+  try {
+    await apiClient.post('/analytics/track/');
+  } catch {
+    // silently ignore — endpoint may not exist
+  }
 };
+
