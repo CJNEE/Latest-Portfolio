@@ -8,8 +8,8 @@ export const LoginOwnerModal: React.FC = () => {
   const { isLoginModalOpen, closeLoginModal, login } = useAuth();
 
   // Login form state
-  const [email, setEmail] = useState('ostagacj@gmail.com');
-  const [password, setPassword] = useState('Christian#10');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState<'Owner' | 'Developer'>('Owner');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ export const LoginOwnerModal: React.FC = () => {
   // Forgot password flow state
   const [isForgotMode, setIsForgotMode] = useState(false);
   const [forgotStep, setForgotStep] = useState<'email' | 'code' | 'password'>('email');
-  const [forgotEmail, setForgotEmail] = useState('ostagacj@gmail.com');
+  const [forgotEmail, setForgotEmail] = useState('');
   const [resetCode, setResetCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -290,7 +290,7 @@ export const LoginOwnerModal: React.FC = () => {
                 </div>
               )}
 
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleLogin} autoComplete="off">
                 <div style={{ marginBottom: '16px' }}>
                   <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     Email Address
@@ -300,6 +300,7 @@ export const LoginOwnerModal: React.FC = () => {
                     <input
                       type="email"
                       required
+                      autoComplete="off"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="ostagacj@gmail.com"
@@ -335,6 +336,7 @@ export const LoginOwnerModal: React.FC = () => {
                     <input
                       type="password"
                       required
+                      autoComplete="new-password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••••"
